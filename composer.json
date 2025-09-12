@@ -1,0 +1,15 @@
+{
+    "name": "root/html",
+    "autoload": {
+        "psr-4": {
+            "Root\\Html\\": "src/"
+        }
+    },
+    "require": {
+        "doctrine/orm": "^3.5",
+        "symfony/console": "^7.3",
+        "doctrine/annotations": "^2.0",
+        "psr/cache": "^3.0",
+        "symfony/cache": "^7.3"
+    }
+}
