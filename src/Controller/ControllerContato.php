@@ -5,7 +5,7 @@ use App\Model\ModelContato;
 use App\Model\ModelPessoa;
 use Doctrine\ORM\EntityManager;
 
-class ContatoController
+class ControllerContato
 {
     private $em;
 
@@ -20,14 +20,14 @@ class ContatoController
         $repo = $this->em->getRepository(ModelContato::class);
         $contatos = $repo->findAll();
 
-        include __DIR__ . "/../../views/contato/index.php";
+        include __DIR__ . "/../../view/contato/index.php";
     }
 
     // Formulário de criação
     public function create()
     {
         $pessoas = $this->em->getRepository(ModelPessoa::class)->findAll();
-        include __DIR__ . "/../../views/contato/create.php";
+        include __DIR__ . "/../../view/contato/create.php";
     }
 
     // Salvar contato
@@ -59,7 +59,7 @@ class ContatoController
     public function show($id)
     {
         $contato = $this->em->find(ModelContato::class, $id);
-        include __DIR__ . "/../../views/contato/show.php";
+        include __DIR__ . "/../../view/contato/show.php";
     }
 
     // Formulário de edição
@@ -68,7 +68,7 @@ class ContatoController
         $contato = $this->em->find(ModelContato::class, $id);
         $pessoas = $this->em->getRepository(ModelPessoa::class)->findAll();
 
-        include __DIR__ . "/../../views/contato/edit.php";
+        include __DIR__ . "/../../view/contato/edit.php";
     }
 
     // Atualizar contato
@@ -91,7 +91,7 @@ class ContatoController
     // Excluir contato
     public function delete($id)
     {
-        $contato = $this->em->find(Contato::class, $id);
+        $contato = $this->em->find(ModelContato::class, $id);
 
         $this->em->remove($contato);
         $this->em->flush();

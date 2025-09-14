@@ -4,7 +4,7 @@ namespace App\Controller;
 use App\Model\ModelPessoa;
 use Doctrine\ORM\EntityManager;
 
-class PessoaController
+class ControllerPessoa
 {
     private $em;
 
@@ -29,13 +29,13 @@ class PessoaController
             $pessoas = $repo->findAll();
         }
 
-        include __DIR__ . "/../../views/pessoa/index.php";
+        include __DIR__ . "/../../view/pessoa/index.php";
     }
 
     // Formulário de criação
     public function create()
     {
-        include __DIR__ . "/../../views/pessoa/create.php";
+        include __DIR__ . "/../../view/pessoa/create.php";
     }
 
     // Salvar pessoa
@@ -63,7 +63,7 @@ class PessoaController
     public function show($id)
     {
         $pessoa = $this->em->find(ModelPessoa::class, $id);
-        include __DIR__ . "/../../views/pessoa/show.php";
+        include __DIR__ . "/../../view/pessoa/show.php";
     }
 
     // Formulário de edição
