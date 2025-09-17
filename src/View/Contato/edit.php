@@ -7,7 +7,7 @@
 <body>
   <h1>Editar Contato</h1>
 
-  <form method="POST" action="/contatos/<?= $contato->getId() ?>/update">
+  <form method="POST" action="/contato/<?= $contato->getId() ?>/update">
     <label>Tipo:</label><br>
     <select name="tipo" required>
       <option value="1" <?= $contato->getTipo() ? "selected" : "" ?>>Telefone</option>
@@ -29,6 +29,6 @@
     <button type="submit">Salvar</button>
   </form>
 
-  <a href="/contatos">Voltar</a>
+  <a href="/contato">Voltar</a>
 </body>
 </html>

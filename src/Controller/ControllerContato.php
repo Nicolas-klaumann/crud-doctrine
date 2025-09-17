@@ -20,14 +20,14 @@ class ControllerContato
         $repo = $this->em->getRepository(ModelContato::class);
         $contatos = $repo->findAll();
 
-        include __DIR__ . "/../../view/contato/index.php";
+        include __DIR__ . "/../View/Contato/index.php";
     }
 
     // Formulário de criação
     public function create()
     {
         $pessoas = $this->em->getRepository(ModelPessoa::class)->findAll();
-        include __DIR__ . "/../../view/contato/create.php";
+        include __DIR__ . "/../View/Contato/create.php";
     }
 
     // Salvar contato
@@ -51,7 +51,7 @@ class ControllerContato
         $this->em->persist($contato);
         $this->em->flush();
 
-        header("Location: /contatos");
+        header("Location: /contato");
         exit;
     }
 
@@ -59,7 +59,7 @@ class ControllerContato
     public function show($id)
     {
         $contato = $this->em->find(ModelContato::class, $id);
-        include __DIR__ . "/../../view/contato/show.php";
+        include __DIR__ . "/../View/Contato/show.php";
     }
 
     // Formulário de edição
@@ -68,7 +68,7 @@ class ControllerContato
         $contato = $this->em->find(ModelContato::class, $id);
         $pessoas = $this->em->getRepository(ModelPessoa::class)->findAll();
 
-        include __DIR__ . "/../../view/contato/edit.php";
+        include __DIR__ . "/../View/Contato/edit.php";
     }
 
     // Atualizar contato
@@ -84,7 +84,7 @@ class ControllerContato
 
         $this->em->flush();
 
-        header("Location: /contatos");
+        header("Location: /contato");
         exit;
     }
 
@@ -96,7 +96,7 @@ class ControllerContato
         $this->em->remove($contato);
         $this->em->flush();
 
-        header("Location: /contatos");
+        header("Location: /contato");
         exit;
     }
 }

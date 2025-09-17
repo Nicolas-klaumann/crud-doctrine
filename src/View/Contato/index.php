@@ -7,7 +7,7 @@
 <body>
   <h1>Lista de Contatos</h1>
 
-  <a href="/contatos/create">Novo Contato</a>
+  <a href="/contato/create">Novo Contato</a>
 
   <table border="1" cellpadding="5">
     <tr>
@@ -24,9 +24,9 @@
         <td><?= $contato->getDescricao() ?></td>
         <td><?= $contato->getPessoa()->getNome() ?></td>
         <td>
-          <a href="/contatos/<?= $contato->getId() ?>">Ver</a> |
-          <a href="/contatos/<?= $contato->getId() ?>/edit">Editar</a> |
-          <a href="/contatos/<?= $contato->getId() ?>/delete" onclick="return confirm('Deseja excluir?')">Excluir</a>
+          <a href="/contato/<?= $contato->getId() ?>">Ver</a> |
+          <a href="/contato/<?= $contato->getId() ?>/edit">Editar</a> |
+          <a href="/contato/<?= $contato->getId() ?>/delete" onclick="return confirm('Deseja excluir?')">Excluir</a>
         </td>
       </tr>
     <?php endforeach; ?>

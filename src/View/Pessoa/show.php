@@ -11,6 +11,6 @@
   <p><strong>Nome:</strong> <?= $pessoa->getNome() ?></p>
   <p><strong>CPF:</strong> <?= $pessoa->getCpf() ?></p>
 
-  <a href="/pessoas">Voltar</a>
+  <a href="/pessoa">Voltar</a>
 </body>
 </html>

@@ -7,7 +7,7 @@
 <body>
   <h1>Cadastrar Pessoa</h1>
 
-  <form method="POST" action="/pessoas/store">
+  <form method="POST" action="/pessoa/store">
     <label>Nome:</label><br>
     <input type="text" name="nome" required><br><br>
 
@@ -17,6 +17,6 @@
     <button type="submit">Salvar</button>
   </form>
 
-  <a href="/pessoas">Voltar</a>
+  <a href="/pessoa">Voltar</a>
 </body>
 </html>

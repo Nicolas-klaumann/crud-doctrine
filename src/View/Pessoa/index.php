@@ -7,12 +7,12 @@
 <body>
   <h1>Lista de Pessoas</h1>
 
-  <form method="GET" action="/pessoas">
+  <form method="GET" action="/pessoa">
       <input type="text" name="nome" placeholder="Pesquisar por nome">
       <button type="submit">Buscar</button>
   </form>
 
-  <a href="/pessoas/create">Nova Pessoa</a>
+  <a href="/pessoa/create">Nova Pessoa</a>
 
   <table border="1" cellpadding="5">
     <tr>
@@ -27,9 +27,9 @@
         <td><?= $pessoa->getNome() ?></td>
         <td><?= $pessoa->getCpf() ?></td>
         <td>
-          <a href="/pessoas/<?= $pessoa->getId() ?>">Ver</a> |
-          <a href="/pessoas/<?= $pessoa->getId() ?>/edit">Editar</a> |
-          <a href="/pessoas/<?= $pessoa->getId() ?>/delete" onclick="return confirm('Deseja excluir?')">Excluir</a>
+          <a href="/pessoa/<?= $pessoa->getId() ?>">Ver</a> |
+          <a href="/pessoa/<?= $pessoa->getId() ?>/edit">Editar</a> |
+          <a href="/pessoa/<?= $pessoa->getId() ?>/delete" onclick="return confirm('Deseja excluir?')">Excluir</a>
         </td>
       </tr>
     <?php endforeach; ?>

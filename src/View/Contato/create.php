@@ -7,7 +7,7 @@
 <body>
   <h1>Cadastrar Contato</h1>
 
-  <form method="POST" action="/contatos/store">
+  <form method="POST" action="/contato/store">
     <label>Tipo:</label><br>
     <select name="tipo" required>
       <option value="1">Telefone</option>
@@ -27,6 +27,6 @@
     <button type="submit">Salvar</button>
   </form>
 
-  <a href="/contatos">Voltar</a>
+  <a href="/contato">Voltar</a>
 </body>
 </html>

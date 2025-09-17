@@ -12,6 +12,6 @@
   <p><strong>Descrição:</strong> <?= $contato->getDescricao() ?></p>
   <p><strong>Pessoa:</strong> <?= $contato->getPessoa()->getNome() ?></p>
 
-  <a href="/contatos">Voltar</a>
+  <a href="/contato">Voltar</a>
 </body>
 </html>

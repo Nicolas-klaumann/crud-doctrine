@@ -5,17 +5,19 @@ services:
     build: .
     container_name: crud_contatos
     volumes:
-      - ./:/var/www/html
+      - ./public:/var/www/html
+      - ./src:/var/www/src
+      - ./vendor:/var/www/vendor
     ports:
       - "8080:80"
     depends_on:
       - db
     environment:
-      - DATABASE_HOST=db
-      - DATABASE_PORT=3306
-      - DATABASE_NAME=contatos_db
-      - DATABASE_USER=admin
-      - DATABASE_PASSWORD=admin
+      DATABASE_HOST: db
+      DATABASE_PORT: 3306
+      DATABASE_NAME: contatos_db
+      DATABASE_USER: admin
+      DATABASE_PASSWORD: admin
 
   db:
     image: mysql:8.0
@@ -23,6 +25,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: contatos_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
     volumes:
       - db_data:/var/lib/mysql
     ports:

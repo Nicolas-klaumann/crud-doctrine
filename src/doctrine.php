@@ -1,8 +1,9 @@
 <?php
-// src/bootstrap.php
+// src/doctrine.php
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
+use Doctrine\DBAL\DriverManager;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -19,10 +20,13 @@ $dbParams = [
     'host'     => getenv('DATABASE_HOST') ?: '127.0.0.1',
     'port'     => getenv('DATABASE_PORT') ?: '3306',
     'user'     => getenv('DATABASE_USER') ?: 'admin',
-    'password' => getenv('DATABASE_PASSWORD') ?: '',
+    'password' => getenv('DATABASE_PASSWORD') ?: 'admin',
     'dbname'   => getenv('DATABASE_NAME') ?: 'contacts_db',
     'charset'  => 'utf8mb4'
 ];
 
+// Cria a conexão
+$connection = DriverManager::getConnection($dbParams, $config);
+
 // Cria o EntityManager
-$entityManager = EntityManager::create($dbParams, $config);
+$entityManager = new EntityManager($connection, $config);

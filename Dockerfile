@@ -3,6 +3,9 @@ FROM php:8.2-apache
 # habilitar mod_rewrite para esconder a rota
 RUN a2enmod rewrite
 
+# habilitar .htaccess no /var/www/html
+RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+
 # dependencias
 RUN apt-get update && apt-get install -y \
     libzip-dev unzip git \

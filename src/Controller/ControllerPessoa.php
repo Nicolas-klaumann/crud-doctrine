@@ -29,13 +29,13 @@ class ControllerPessoa
             $pessoas = $repo->findAll();
         }
 
-        include __DIR__ . "/../../view/pessoa/index.php";
+        include __DIR__ . "/../View/Pessoa/index.php";
     }
 
     // Formulário de criação
     public function create()
     {
-        include __DIR__ . "/../../view/pessoa/create.php";
+        include __DIR__ . "/../View/Pessoa/create.php";
     }
 
     // Salvar pessoa
@@ -55,7 +55,7 @@ class ControllerPessoa
         $this->em->persist($pessoa);
         $this->em->flush();
 
-        header("Location: /pessoas");
+        header("Location: /pessoa");
         exit;
     }
 
@@ -63,14 +63,14 @@ class ControllerPessoa
     public function show($id)
     {
         $pessoa = $this->em->find(ModelPessoa::class, $id);
-        include __DIR__ . "/../../view/pessoa/show.php";
+        include __DIR__ . "/../View/Pessoa/show.php";
     }
 
     // Formulário de edição
     public function edit($id)
     {
         $pessoa = $this->em->find(ModelPessoa::class, $id);
-        include __DIR__ . "/../../views/pessoa/edit.php";
+        include __DIR__ . "/../View/Pessoa/edit.php";
     }
 
     // Atualizar pessoa
@@ -83,7 +83,7 @@ class ControllerPessoa
 
         $this->em->flush();
 
-        header("Location: /pessoas");
+        header("Location: /pessoa");
         exit;
     }
 
@@ -95,7 +95,7 @@ class ControllerPessoa
         $this->em->remove($pessoa);
         $this->em->flush();
 
-        header("Location: /pessoas");
+        header("Location: /pessoa");
         exit;
     }
 }

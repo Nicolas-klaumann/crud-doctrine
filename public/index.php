@@ -13,53 +13,61 @@ $uri = str_replace('/index.php', '', $uri);
 
 // Router simples
 switch (true) {
-    // Pessoas
-    case $uri === '/' || $uri === '/pessoas':
+    // Pessoa
+    case $uri === '/' || $uri === '/pessoa':
         (new ControllerPessoa($entityManager))->index();
         break;
 
-    case $uri === '/pessoas/create' && $method === 'GET':
+    case $uri === '/pessoa/create' && $method === 'GET':
         (new ControllerPessoa($entityManager))->create();
         break;
 
-    case $uri === '/pessoas/store' && $method === 'POST':
+    case $uri === '/pessoa/store' && $method === 'POST':
         (new ControllerPessoa($entityManager))->store($_POST);
         break;
 
-    case preg_match('#^/pessoas/edit/(\d+)$#', $uri, $matches) && $method === 'GET':
+    case preg_match('#^/pessoa/(\d+)$#', $uri, $matches) && $method === 'GET':
+        (new ControllerPessoa($entityManager))->show((int)$matches[1]);
+        break;
+        
+    case preg_match('#^/pessoa/(\d+)/edit$#', $uri, $matches) && $method === 'GET':
         (new ControllerPessoa($entityManager))->edit((int)$matches[1]);
+        break;    
+ 
+    case preg_match('#^/pessoa/(\d+)/update$#', $uri, $matches) && $method === 'POST':
+        (new ControllerPessoa($entityManager))->update((int)$matches[1], $_POST);
         break;
 
-    case $uri === '/pessoas/update' && $method === 'POST':
-        (new ControllerPessoa($entityManager))->update($_POST);
-        break;
-
-    case preg_match('#^/pessoas/delete/(\d+)$#', $uri, $matches) && $method === 'GET':
+    case preg_match('#^/pessoa/(\d+)/delete$#', $uri, $matches) && $method === 'GET':
         (new ControllerPessoa($entityManager))->delete((int)$matches[1]);
         break;
-
+        
     // Contatos
-    case $uri === '/contatos':
+    case $uri === '/contato':
         (new ControllerContato($entityManager))->index();
         break;
 
-    case $uri === '/contatos/create' && $method === 'GET':
+    case $uri === '/contato/create' && $method === 'GET':
         (new ControllerContato($entityManager))->create();
         break;
 
-    case $uri === '/contatos/store' && $method === 'POST':
+    case $uri === '/contato/store' && $method === 'POST':
         (new ControllerContato($entityManager))->store($_POST);
         break;
+    
+    case preg_match('#^/contato/(\d+)$#', $uri, $matches) && $method === 'GET':
+        (new ControllerContato($entityManager))->show((int)$matches[1]);
+        break;
 
-    case preg_match('#^/contatos/edit/(\d+)$#', $uri, $matches) && $method === 'GET':
+    case preg_match('#^/contato/(\d+)/edit$#', $uri, $matches) && $method === 'GET':
         (new ControllerContato($entityManager))->edit((int)$matches[1]);
         break;
 
-    case $uri === '/contatos/update' && $method === 'POST':
-        (new ControllerContato($entityManager))->update($_POST);
+    case preg_match('#^/contato/(\d+)/update$#', $uri, $matches) && $method === 'POST':
+        (new ControllerContato($entityManager))->update((int)$matches[1], $_POST);
         break;
 
-    case preg_match('#^/contatos/delete/(\d+)$#', $uri, $matches) && $method === 'GET':
+    case preg_match('#^/contato/(\d+)/delete$#', $uri, $matches) && $method === 'GET':
         (new ControllerContato($entityManager))->delete((int)$matches[1]);
         break;
 

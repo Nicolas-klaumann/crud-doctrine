@@ -7,7 +7,7 @@
 <body>
   <h1>Editar Pessoa</h1>
 
-  <form method="POST" action="/pessoas/<?= $pessoa->getId() ?>/update">
+  <form method="POST" action="/pessoa/<?= $pessoa->getId() ?>/update">
     <label>Nome:</label><br>
     <input type="text" name="nome" value="<?= $pessoa->getNome() ?>" required><br><br>
 
@@ -17,6 +17,6 @@
     <button type="submit">Salvar</button>
   </form>
 
-  <a href="/pessoas">Voltar</a>
+  <a href="/pessoa">Voltar</a>
 </body>
 </html>
