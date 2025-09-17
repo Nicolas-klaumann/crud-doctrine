@@ -3,36 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <title>Pessoas</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-  <h1>Lista de Pessoas</h1>
+  <body>
+    <div class="container">
+      <h1>Lista de Pessoas</h1>
+      <p><a href="/contato">Contatos</a></p>
 
-  <form method="GET" action="/pessoa">
-      <input type="text" name="nome" placeholder="Pesquisar por nome">
-      <button type="submit">Buscar</button>
-  </form>
+      <form method="GET" action="/pessoa">
+          <input type="text" name="nome" placeholder="Pesquisar por nome">
+          <button type="submit">Buscar</button>
+      </form>
 
-  <a href="/pessoa/create">Nova Pessoa</a>
+      <p><a href="/pessoa/create">+ Nova Pessoa</a></p>
 
-  <table border="1" cellpadding="5">
-    <tr>
-      <th>ID</th>
-      <th>Nome</th>
-      <th>CPF</th>
-      <th>Ações</th>
-    </tr>
-    <?php foreach ($pessoas as $pessoa): ?>
-      <tr>
-        <td><?= $pessoa->getId() ?></td>
-        <td><?= $pessoa->getNome() ?></td>
-        <td><?= $pessoa->getCpf() ?></td>
-        <td>
-          <a href="/pessoa/<?= $pessoa->getId() ?>">Ver</a> |
-          <a href="/pessoa/<?= $pessoa->getId() ?>/edit">Editar</a> |
-          <a href="/pessoa/<?= $pessoa->getId() ?>/delete" onclick="return confirm('Deseja excluir?')">Excluir</a>
-        </td>
-      </tr>
-    <?php endforeach; ?>
-  </table>
-</body>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>Ações</th>
+        </tr>
+        <?php foreach ($pessoas as $pessoa): ?>
+          <tr>
+            <td><?= $pessoa->getId() ?></td>
+            <td><?= $pessoa->getNome() ?></td>
+            <td><?= $pessoa->getCpf() ?></td>
+            <td class="actions">
+              <a href="/pessoa/<?= $pessoa->getId() ?>">Ver</a>
+              <a href="/pessoa/<?= $pessoa->getId() ?>/edit">Editar</a>
+              <a href="/pessoa/<?= $pessoa->getId() ?>/delete" onclick="return confirm('Deseja excluir?')">Excluir</a>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      </table>
+    </div>
+  </body>
 </html>
