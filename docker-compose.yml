@@ -5,11 +5,9 @@ services:
     build: .
     container_name: crud_contatos
     volumes:
-      - ./public:/var/www/html
-      - ./src:/var/www/src
-      - ./vendor:/var/www/vendor
+      - .:/var/www/html
     ports:
-      - "8080:80"
+      - "8000:8000"
     depends_on:
       - db
     environment:

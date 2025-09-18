@@ -1,12 +1,6 @@
-FROM php:8.2-apache
+FROM php:8.2-cli
 
-# habilitar mod_rewrite para esconder a rota
-RUN a2enmod rewrite
-
-# habilitar .htaccess no /var/www/html
-RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
-
-# dependencias
+# dependências
 RUN apt-get update && apt-get install -y \
     libzip-dev unzip git \
  && docker-php-ext-install pdo pdo_mysql
@@ -16,5 +10,8 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-# permissoes
+# permissões
 RUN chown -R www-data:www-data /var/www/html
+
+# comando para rodar o servidor embutido do PHP apontando para public/
+CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]

@@ -8,7 +8,8 @@
   <body>
     <div class="container">
       <h1>Lista de Pessoas</h1>
-      <p><a href="/contato">Contatos</a></p>
+
+      <p><a href="/contato" class="btn-secondary">Voltar para Contatos</a></p>
 
       <form method="GET" action="/pessoa">
           <input type="text" name="nome" placeholder="Pesquisar por nome">

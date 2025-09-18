@@ -9,6 +9,8 @@
   <div class="container">
     <h1>Lista de Contatos</h1>
 
+    <p><a href="/pessoa" class="btn-secondary">Voltar para Pessoas</a></p>
+
     <p><a href="/contato/create" class="btn-primary">+ Novo Contato</a></p>
 
     <table>
@@ -37,8 +39,6 @@
         <?php endforeach; ?>
       </tbody>
     </table>
-
-    <p><a href="/pessoa" class="btn-secondary">Voltar para Pessoas</a></p>
   </div>
 </body>
 </html>
