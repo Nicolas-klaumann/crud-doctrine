@@ -1,20 +1,12 @@
 <?php
+
 namespace App\Controller;
 
 use App\Model\ModelPessoa;
-use Doctrine\ORM\EntityManager;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
-class ControllerPessoa
+class ControllerPessoa extends ControllerBase
 {
-    private $em;
-
-    public function __construct(EntityManager $em)
-    {
-        $this->em = $em;
-    }
-
-    // RF01 + RF02: Listar pessoas (com filtro por nome)
     public function index()
     {
         $nome = $_GET['nome'] ?? null;
@@ -30,13 +22,14 @@ class ControllerPessoa
             $pessoas = $repo->findAll();
         }
 
-        include __DIR__ . "/../View/Pessoa/index.php";
+        // Passamos o array com a chave 'pessoas' para a view
+        $this->render("Pessoa/index.php", ['pessoas' => $pessoas]);
     }
 
     // Formulário de criação
     public function create()
     {
-        include __DIR__ . "/../View/Pessoa/create.php";
+        $this->render("Pessoa/create.php");
     }
 
     // Salvar pessoa
@@ -59,26 +52,25 @@ class ControllerPessoa
         } catch (UniqueConstraintViolationException $e) {
             // CPF já existe
             echo "<p style='color:red;'>Erro: já existe uma pessoa cadastrada com este CPF.</p>";
-            include __DIR__ . "/../View/Pessoa/create.php";
+            $this->render("Pessoa/create.php");
             return;
         }
 
-        header("Location: /pessoa");
-        exit;
+        $this->redirect("/pessoa");
     }
 
     // Mostrar pessoa
     public function show($id)
     {
         $pessoa = $this->em->find(ModelPessoa::class, $id);
-        include __DIR__ . "/../View/Pessoa/show.php";
+        $this->render("Pessoa/show.php", ['pessoa' => $pessoa]);
     }
 
     // Formulário de edição
     public function edit($id)
     {
         $pessoa = $this->em->find(ModelPessoa::class, $id);
-        include __DIR__ . "/../View/Pessoa/edit.php";
+        $this->render("Pessoa/edit.php", ['pessoa' => $pessoa]);
     }
 
     // Atualizar pessoa
@@ -93,12 +85,11 @@ class ControllerPessoa
             $this->em->flush();
         } catch (UniqueConstraintViolationException $e) {
             echo "<p style='color:red;'>Erro: já existe outra pessoa com este CPF.</p>";
-            include __DIR__ . "/../View/Pessoa/edit.php";
+            $this->render("Pessoa/edit.php");
             return;
         }
 
-        header("Location: /pessoa");
-        exit;
+        $this->redirect("/pessoa");
     }
 
     // Excluir pessoa
@@ -109,7 +100,6 @@ class ControllerPessoa
         $this->em->remove($pessoa);
         $this->em->flush();
 
-        header("Location: /pessoa");
-        exit;
+        $this->redirect("/pessoa");
     }
 }

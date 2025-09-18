@@ -1,33 +1,26 @@
 <?php
+
 namespace App\Controller;
 
 use App\Model\ModelContato;
 use App\Model\ModelPessoa;
-use Doctrine\ORM\EntityManager;
 
-class ControllerContato
+class ControllerContato extends ControllerBase
 {
-    private $em;
-
-    public function __construct(EntityManager $em)
-    {
-        $this->em = $em;
-    }
-
-    // RF03: Listar contatos
     public function index()
     {
         $repo = $this->em->getRepository(ModelContato::class);
         $contatos = $repo->findAll();
 
-        include __DIR__ . "/../View/Contato/index.php";
+        // Passamos o array com a chave 'contatos' para a view
+        $this->render("Contato/index.php", ['contatos' => $contatos]);
     }
 
     // Formulário de criação
     public function create()
     {
         $pessoas = $this->em->getRepository(ModelPessoa::class)->findAll();
-        include __DIR__ . "/../View/Contato/create.php";
+        $this->render("Contato/create.php", ['pessoas' => $pessoas]);
     }
 
     // Salvar contato
@@ -51,15 +44,14 @@ class ControllerContato
         $this->em->persist($contato);
         $this->em->flush();
 
-        header("Location: /contato");
-        exit;
+        $this->redirect("/contato");
     }
 
     // Mostrar contato
     public function show($id)
     {
         $contato = $this->em->find(ModelContato::class, $id);
-        include __DIR__ . "/../View/Contato/show.php";
+        $this->render("Contato/show.php", ['contato' => $contato]);
     }
 
     // Formulário de edição
@@ -68,7 +60,10 @@ class ControllerContato
         $contato = $this->em->find(ModelContato::class, $id);
         $pessoas = $this->em->getRepository(ModelPessoa::class)->findAll();
 
-        include __DIR__ . "/../View/Contato/edit.php";
+        $this->render("Contato/edit.php", [
+            'contato' => $contato,
+            'pessoas' => $pessoas
+        ]);
     }
 
     // Atualizar contato
@@ -84,8 +79,7 @@ class ControllerContato
 
         $this->em->flush();
 
-        header("Location: /contato");
-        exit;
+        $this->redirect("/contato");
     }
 
     // Excluir contato
@@ -96,7 +90,6 @@ class ControllerContato
         $this->em->remove($contato);
         $this->em->flush();
 
-        header("Location: /contato");
-        exit;
+        $this->redirect("/contato");
     }
-}
+}   
