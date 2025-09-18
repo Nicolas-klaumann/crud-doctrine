@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Model\ModelPessoa;
 use Doctrine\ORM\EntityManager;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 class ControllerPessoa
 {
@@ -52,8 +53,15 @@ class ControllerPessoa
         $pessoa->setNome($nome);
         $pessoa->setCpf($cpf);
 
-        $this->em->persist($pessoa);
-        $this->em->flush();
+        try {
+            $this->em->persist($pessoa);
+            $this->em->flush();
+        } catch (UniqueConstraintViolationException $e) {
+            // CPF já existe
+            echo "<p style='color:red;'>Erro: já existe uma pessoa cadastrada com este CPF.</p>";
+            include __DIR__ . "/../View/Pessoa/create.php";
+            return;
+        }
 
         header("Location: /pessoa");
         exit;
@@ -81,7 +89,13 @@ class ControllerPessoa
         $pessoa->setNome($_POST['nome']);
         $pessoa->setCpf($_POST['cpf']);
 
-        $this->em->flush();
+        try {
+            $this->em->flush();
+        } catch (UniqueConstraintViolationException $e) {
+            echo "<p style='color:red;'>Erro: já existe outra pessoa com este CPF.</p>";
+            include __DIR__ . "/../View/Pessoa/edit.php";
+            return;
+        }
 
         header("Location: /pessoa");
         exit;
