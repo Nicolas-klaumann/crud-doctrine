@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS pessoa (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(255) NOT NULL,
+  cpf VARCHAR(20) NOT NULL,
+  UNIQUE KEY uk_pessoa_cpf (cpf)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS contato (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  tipo TINYINT(1) NOT NULL,            
+  descricao VARCHAR(255) NOT NULL,
+  id_pessoa INT NOT NULL,
+  CONSTRAINT fk_contato_pessoa FOREIGN KEY (id_pessoa) REFERENCES pessoa(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
