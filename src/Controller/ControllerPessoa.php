@@ -56,9 +56,11 @@ class ControllerPessoa extends ControllerBase
             die("Nome e CPF são obrigatórios");
         }
 
+        $cpfLimpo = str_replace(['.', '-'], '', $cpf);
+
         $pessoa = new ModelPessoa();
         $pessoa->setNome($nome);
-        $pessoa->setCpf($cpf);
+        $pessoa->setCpf($cpfLimpo);
 
         try {
             $this->em->persist($pessoa);

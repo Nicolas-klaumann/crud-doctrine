@@ -40,11 +40,12 @@ class ControllerContato extends ControllerBase
      * @author Nicolas Klaumann <nicolas@conectra.com.br> (17-09-2025)
      */
     public function store() {
-        $tipo = $_POST['tipo'] ?? null;
+        error_log(json_encode($_POST));
+        $tipo = $_POST['tipo'];
         $descricao = $_POST['descricao'] ?? null;
         $idPessoa = $_POST['idPessoa'] ?? null;
 
-        if (!$tipo || !$descricao || !$idPessoa) {
+        if (!$descricao || !$idPessoa) {
             die("Todos os campos são obrigatórios");
         }
 
@@ -58,7 +59,7 @@ class ControllerContato extends ControllerBase
         $this->em->persist($contato);
         $this->em->flush();
 
-        $this->redirect("/contato/");
+        $this->redirect("/contato");
     }
 
     /**

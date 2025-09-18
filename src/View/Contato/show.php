@@ -9,14 +9,30 @@
   <div class="container">
     <h1>Detalhes do Contato</h1>
 
-    <div class="card">
-      <p><strong>ID:</strong> <?= $contato->getId() ?></p>
-      <p><strong>Tipo:</strong> <?= $contato->getTipo() ? "Telefone" : "Email" ?></p>
-      <p><strong>Descrição:</strong> <?= $contato->getDescricao() ?></p>
-      <p><strong>Pessoa:</strong> <?= $contato->getPessoa()->getNome() ?></p>
-    </div>
+    <table class="card">
+      <tr>
+        <th>ID</th>
+        <td><?= $contato->getId() ?></td>
+      </tr>
+      <tr>
+        <th>Tipo</th>
+        <td><?= $contato->getTipo() ? "Telefone" : "Email" ?></td>
+      </tr>
+      <tr>
+        <th>Descrição</th>
+        <td><?= $contato->getDescricao() ?></td>
+      </tr>
+      <tr>
+        <th>Pessoa</th>
+        <td><?= $contato->getPessoa()->getNome() ?></td>
+      </tr>
+    </table>
 
-    <p><a href="/contato" class="btn-secondary">Voltar</a></p>
+    <p>
+      <a href="/contato/<?= $contato->getId() ?>/edit">Editar</a> |
+      <a href="/contato/<?= $contato->getId() ?>/delete" onclick="return confirm('Deseja excluir?')">Excluir</a> |
+      <a href="/contato" class="btn-secondary">Voltar</a>
+    </p>
   </div>
 </body>
 </html>
