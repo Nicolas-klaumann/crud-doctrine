@@ -4,6 +4,11 @@ namespace App\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * Classe ModelContato
+ * 
+ * @author Nicolas Klaumann
+ */
 #[ORM\Entity]
 #[ORM\Table(name: "contato")]
 class ModelContato

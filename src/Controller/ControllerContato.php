@@ -5,27 +5,41 @@ namespace App\Controller;
 use App\Model\ModelContato;
 use App\Model\ModelPessoa;
 
+/**
+ * Classe ControllerContato 
+ *
+ * @author Nicolas Klaumann <nicolas@conectra.com.br> (17-09-2025
+ */
 class ControllerContato extends ControllerBase
 {
-    public function index()
-    {
+    /**
+     * Função responsável por renderizar os registros em tela
+     *
+     * @author Nicolas Klaumann <nicolas@conectra.com.br> (17-09-2025)
+     */
+    public function index() {
         $repo = $this->em->getRepository(ModelContato::class);
         $contatos = $repo->findAll();
 
-        // Passamos o array com a chave 'contatos' para a view
         $this->render("Contato/index.php", ['contatos' => $contatos]);
     }
 
-    // Formulário de criação
-    public function create()
-    {
+    /**
+     * Função responsável por renderizar a tela de inserção 
+     *
+     * @author Nicolas Klaumann <nicolas@conectra.com.br> (17-09-2025)
+     */
+    public function create() {
         $pessoas = $this->em->getRepository(ModelPessoa::class)->findAll();
         $this->render("Contato/create.php", ['pessoas' => $pessoas]);
     }
 
-    // Salvar contato
-    public function store()
-    {
+    /**
+     * Função responsável por inserir registros no banco de dados
+     *
+     * @author Nicolas Klaumann <nicolas@conectra.com.br> (17-09-2025)
+     */
+    public function store() {
         $tipo = $_POST['tipo'] ?? null;
         $descricao = $_POST['descricao'] ?? null;
         $idPessoa = $_POST['idPessoa'] ?? null;
@@ -44,19 +58,25 @@ class ControllerContato extends ControllerBase
         $this->em->persist($contato);
         $this->em->flush();
 
-        $this->redirect("/contato");
+        $this->redirect("/contato/");
     }
 
-    // Mostrar contato
-    public function show($id)
-    {
+    /**
+     * Função responsável por mostrar detalhes do registro
+     *
+     * @author Nicolas Klaumann <nicolas@conectra.com.br> (17-09-2025)
+     */
+    public function show($id) {
         $contato = $this->em->find(ModelContato::class, $id);
         $this->render("Contato/show.php", ['contato' => $contato]);
     }
 
-    // Formulário de edição
-    public function edit($id)
-    {
+    /**
+     * Função responsável por renderizar a tela de edição
+     *
+     * @author Nicolas Klaumann <nicolas@conectra.com.br> (17-09-2025)
+     */
+    public function edit($id) {
         $contato = $this->em->find(ModelContato::class, $id);
         $pessoas = $this->em->getRepository(ModelPessoa::class)->findAll();
 
@@ -66,9 +86,12 @@ class ControllerContato extends ControllerBase
         ]);
     }
 
-    // Atualizar contato
-    public function update($id)
-    {
+    /**
+     * Função responsável por fazer a edição de um registro
+     *
+     * @author Nicolas Klaumann <nicolas@conectra.com.br> (17-09-2025)
+     */
+    public function update($id) {
         $contato = $this->em->find(ModelContato::class, $id);
 
         $contato->setTipo($_POST['tipo']);
@@ -82,9 +105,12 @@ class ControllerContato extends ControllerBase
         $this->redirect("/contato");
     }
 
-    // Excluir contato
-    public function delete($id)
-    {
+    /**
+     * Função responsável por remover um registro
+     *
+     * @author Nicolas Klaumann <nicolas@conectra.com.br> (17-09-2025)
+     */
+    public function delete($id) {
         $contato = $this->em->find(ModelContato::class, $id);
 
         $this->em->remove($contato);

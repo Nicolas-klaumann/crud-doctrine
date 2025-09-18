@@ -5,10 +5,19 @@ namespace App\Controller;
 use App\Model\ModelPessoa;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
+/**
+ * Classe ControllerPessoa 
+ *
+ * @author Nicolas Klaumann <nicolas@conectra.com.br> (17-09-2025)
+ */
 class ControllerPessoa extends ControllerBase
 {
-    public function index()
-    {
+    /**
+     * Função responsável por renderizar os registros em tela
+     *
+     * @author Nicolas Klaumann <nicolas@conectra.com.br> (17-09-2025)
+     */
+    public function index() {
         $nome = $_GET['nome'] ?? null;
         $repo = $this->em->getRepository(ModelPessoa::class);
 
@@ -22,19 +31,24 @@ class ControllerPessoa extends ControllerBase
             $pessoas = $repo->findAll();
         }
 
-        // Passamos o array com a chave 'pessoas' para a view
         $this->render("Pessoa/index.php", ['pessoas' => $pessoas]);
     }
 
-    // Formulário de criação
-    public function create()
-    {
+    /**
+     * Função responsável por renderizar a tela de inserção 
+     *
+     * @author Nicolas Klaumann <nicolas@conectra.com.br> (17-09-2025)
+     */
+    public function create() {
         $this->render("Pessoa/create.php");
     }
 
-    // Salvar pessoa
-    public function store()
-    {
+    /**
+     * Função responsável por inserir registros no banco de dados
+     *
+     * @author Nicolas Klaumann <nicolas@conectra.com.br> (17-09-2025)
+     */
+    public function store() {
         $nome = $_POST['nome'] ?? null;
         $cpf  = $_POST['cpf'] ?? null;
 
@@ -59,23 +73,32 @@ class ControllerPessoa extends ControllerBase
         $this->redirect("/pessoa");
     }
 
-    // Mostrar pessoa
-    public function show($id)
-    {
+    /**
+     * Função responsável por mostrar detalhes do registro
+     *
+     * @author Nicolas Klaumann <nicolas@conectra.com.br> (17-09-2025)
+     */
+    public function show($id) {
         $pessoa = $this->em->find(ModelPessoa::class, $id);
         $this->render("Pessoa/show.php", ['pessoa' => $pessoa]);
     }
 
-    // Formulário de edição
-    public function edit($id)
-    {
+    /**
+     * Função responsável por renderizar a tela de edição
+     *
+     * @author Nicolas Klaumann <nicolas@conectra.com.br> (17-09-2025)
+     */
+    public function edit($id) {
         $pessoa = $this->em->find(ModelPessoa::class, $id);
         $this->render("Pessoa/edit.php", ['pessoa' => $pessoa]);
     }
 
-    // Atualizar pessoa
-    public function update($id)
-    {
+    /**
+     * Função responsável por fazer a edição de um registro
+     *
+     * @author Nicolas Klaumann <nicolas@conectra.com.br> (17-09-2025)
+     */
+    public function update($id) {
         $pessoa = $this->em->find(ModelPessoa::class, $id);
 
         $pessoa->setNome($_POST['nome']);
@@ -92,9 +115,12 @@ class ControllerPessoa extends ControllerBase
         $this->redirect("/pessoa");
     }
 
-    // Excluir pessoa
-    public function delete($id)
-    {
+    /**
+     * Função responsável por remover um registro
+     *
+     * @author Nicolas Klaumann <nicolas@conectra.com.br> (17-09-2025)
+     */
+    public function delete($id) {
         $pessoa = $this->em->find(ModelPessoa::class, $id);
 
         $this->em->remove($pessoa);

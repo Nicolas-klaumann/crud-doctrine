@@ -1,5 +1,4 @@
 <?php
-// src/doctrine.php
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
@@ -11,10 +10,10 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $paths = [__DIR__ . "/Model"];
 $isDevMode = true;
 
-// Configuração via Attributes (PHP 8+)
+// Configuração via Attributes
 $config = ORMSetup::createAttributeMetadataConfiguration($paths, $isDevMode);
 
-// Configuração do banco (variáveis de ambiente ou defaults)
+// Configuração do banco
 $dbParams = [
     'driver'   => 'pdo_mysql',
     'host'     => getenv('DATABASE_HOST') ?: '127.0.0.1',

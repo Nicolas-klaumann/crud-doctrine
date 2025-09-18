@@ -5,11 +5,9 @@ namespace App\Controller;
 use Doctrine\ORM\EntityManager;
 
 /**
- * @class ControllerBase
+ * Classe ControllerBase
  *
- * Classe base para todos os controladores da aplicação.
- * Fornece a injeção do EntityManager e pode conter métodos utilitários
- * que são compartilhados por outros controllers.
+ * @author Nicolas Klaumann <nicolas@conectra.com.br> (17-09-2025)
  */
 class ControllerBase
 {
@@ -23,7 +21,8 @@ class ControllerBase
      * Injeta a dependência do EntityManager, tornando-o disponível para
      * todas as classes que herdam de ControllerBase.
      *
-     * @param EntityManager $em O EntityManager a ser injetado.
+     * @param EntityManager $em O EntityManager a ser injetado. 
+     * @author Nicolas Klaumann <nicolas@conectra.com.br> (17-09-2025)
      */
     public function __construct(EntityManager $em)
     {
@@ -36,7 +35,8 @@ class ControllerBase
      * permitindo que você altere o caminho de forma global se necessário.
      *
      * @param string $path O caminho do arquivo de view a ser incluído.
-     * @param array $data Um array de dados que será extraído e disponibilizado para a view.
+     * @param array $data Um array de dados que será extraído e disponibilizado para a view. 
+     * @author Nicolas Klaumann <nicolas@conectra.com.br> (17-09-2025)
      */
     protected function render(string $path, array $data = []): void
     {
@@ -51,7 +51,8 @@ class ControllerBase
      * Redireciona para uma URL específica.
      * Um método utilitário para facilitar o redirecionamento.
      *
-     * @param string $path O caminho da URL para onde redirecionar.
+     * @param string $path O caminho da URL para onde redirecionar. 
+     * @author Nicolas Klaumann <nicolas@conectra.com.br> (17-09-2025)
      */
     protected function redirect(string $path): void
     {
